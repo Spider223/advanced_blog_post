@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import Register from "./FreePages/Register";
+import Login from "./FreePages/Login";
+import IndexPage from "./FreePages/IndexPage";
+import Nav from "./FreePages/Navbar";
+import ProtectedRoutes from "./ProtectedPages/ProtectedRoutes";
+import Create from "./ProtectedPages/Create";
+import SinglePost from "./ProtectedPages/SinglePost";
+import EditPost from "./ProtectedPages/EditPost";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/post/:id" element={<SinglePost />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/create" element={<Create />} />
+          <Route path="/edit/:id" element={<EditPost />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
-
-export default App;
